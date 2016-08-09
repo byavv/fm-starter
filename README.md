@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/byavv/fm-starter.svg?style=svg)](https://circleci.com/gh/byavv/fm-starter)
+[![codecov](https://codecov.io/gh/byavv/fm-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/byavv/fm-starter)
 # Microservice starter for [funny-market](https://github.com/byavv/funny-market) project
 
 ### Features: 
@@ -13,4 +15,4 @@
     npm start
     npm run dev
     npm test
-    npm test-cov
+    npm clean
