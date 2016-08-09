@@ -31,6 +31,9 @@ module.exports = function (app, done) {
                 app.rabbit = rabbit;
                 debug("Rabbit client started");
             })
-            .then(done);
+            .then(done)
+            .catch(err=>{
+                debug(`Something went wrong: ${err}`)
+            });
     
 }
