@@ -3,7 +3,7 @@ var expect = chai.expect;
 var assert = chai.assert;
 chai.should();
 
-describe('profile test', function () {
+describe('starter test', function () {
 
   var server = require('../server/server');
   var request = require('supertest')(server);
@@ -13,6 +13,6 @@ describe('profile test', function () {
   });
 
   it('test', function () {
-    assert.lengthOf("TRR", 3);
+    assert.lengthOf("starter", 7);
   });
 });
