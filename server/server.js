@@ -6,7 +6,7 @@ const boot = require('loopback-boot')
     , debug = require('debug')('starter');
 
 const host = process.env.HTTP_HOST || '0.0.0.0',
-    http_port = process.env.HTTP_PORT || 3009,
+    http_port = process.env.HTTP_PORT || 3099,
     etcd_host = process.env.ETCD_HOST || 'localhost',
     rabbit_host = process.env.BROCKER_HOST || 'localhost';
 
@@ -25,21 +25,28 @@ boot(app, __dirname, (err) => {
         const httpServer = http.createServer(app).listen(http_port, () => {
             app.emit('started');
             app.close = (done) => {
-                debug('Exiting...');
                 app.removeAllListeners('started');
                 app.removeAllListeners('loaded');
+                if (app.services) {
+                    debug('Leave etcd ...');
+                    app.services.leave(app.get('ms_name'));
+                }
                 if (app.rabbit) {
+                    debug('Close rabbit...');
                     app.rabbit.closeAll();
                 }
-                httpServer.close(() => {
-                    process.exit(0);
-                });
+                httpServer.close(done);
             };
         });
-        process.on('SIGINT', function () {
-            app.close();
-        });
     };
+
+    process.on('SIGINT', () => {
+        debug('Exiting...');
+        app.close((err) => {            
+            process.exit(err ? -1 : 0)
+        });
+    });
+
     if (require.main === module)
         app.start();
     app.loaded = true;

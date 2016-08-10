@@ -9,6 +9,9 @@
 
 ### Usage
 
+    npm install -g nodemon 
+     ...
+    cd fm-starter
     npm install
 
 ### Basic Commands
@@ -16,4 +19,5 @@
     npm start
     npm run dev
     npm test
-    npm clean
+    npm run clean
+    npm run serve

@@ -8,7 +8,8 @@ module.exports = function (app) {
     var microserviceName = app.get('ms_name');
     var services;
     app.once('started', function () {
-        services = registry(`${etcd_host}:4001`);        
+        services = registry(`${etcd_host}:4001`);    
+        app.services = services;    
         services.join(microserviceName, { port: http_port });
         setTimeout(() => {
             services.lookup(microserviceName, function (err, service) {
@@ -19,10 +20,5 @@ module.exports = function (app) {
                 }
             });
         }, 1000);
-    });
-
-    app.close = () => {
-        services.leave(microserviceName);
-        console.log(`Service ${microserviceName} stopped`);
-    };
+    });   
 };

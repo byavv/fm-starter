@@ -1,6 +1,7 @@
 {
   "name": "fm-starter",
   "version": "0.0.1",
+  "author": "Viacheslav Aksenchyk <aksenchyk.v@gmail.com>",
   "main": "server/server.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node .",
@@ -10,11 +11,16 @@
     "clean": "npm run clean:coverage && npm run clean:temp && npm run clean:build",
     "clean:coverage": "rm -rf ./coverage",
     "clean:temp": "rm -rf ./tmp/*",
-    "clean:build": "rm -rf ./build/*"
+    "clean:build": "rm -rf ./build/*",
+    "serve": "nodemon .",
+    "pm2": "cross-env NODE_ENV=production pm2 start . --name=starter -i max --no-daemon"
   },
+  "engines" : {
+    "node" : ">=6.0"
+  } ,
   "dependencies": {
     "amqplib": "^0.4.1",
-    "async": "^2.0.0-rc.4",
+    "async": "^2.0.1",
     "codecov.io": "^0.1.6",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
@@ -41,10 +47,9 @@
     "sinon": "^1.17.4",
     "supertest": "^1.2.0"
   },
-  "repository": {
-    "type": "",
-    "url": ""
+  "repository": { 
+    "type": "git",
+    "url": "https://github.com/byavv/fm-starter.git"
   },
-  "description": "starter"
+  "description": "microservice starter project"
 }
-

@@ -34,6 +34,5 @@ module.exports = function (app, done) {
             .then(done)
             .catch(err=>{
                 debug(`Something went wrong: ${err}`)
-            });
-    
+            });    
 }
